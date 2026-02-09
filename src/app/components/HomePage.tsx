@@ -151,26 +151,82 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
   const testimonials = [
     {
-      name: 'Priya Sharma',
-      role: 'Parent, Class 10',
-      content: 'Sri Chaitanya has been a game-changer for my daughter. The personalized attention and excellent teaching have helped her excel academically and grow as a confident individual.',
+      name: 'Aarav Nair',
+      role: 'Class 12, Science Stream',
+      content: 'The study plan is crystal clear and the weekly tests helped me track my progress without stress.',
       rating: 5,
-      image: 'PS',
+      image: 'AN',
+      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e',
     },
     {
-      name: 'Raj Kumar',
-      role: 'JEE AIR 245',
-      content: 'The competitive exam preparation at Sri Chaitanya is outstanding. The dedicated faculty and structured approach helped me achieve my dream of getting into IIT.',
+      name: 'Diya Patel',
+      role: 'Class 10, CBSE',
+      content: 'Doubt-solving sessions are super helpful. I feel more confident going into board exams.',
       rating: 5,
-      image: 'RK',
+      image: 'DP',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330',
     },
     {
-      name: 'Anita Reddy',
-      role: 'Parent, Class 7',
-      content: 'Beyond academics, my son has developed strong values and life skills. The holistic approach at Sri Chaitanya is truly commendable.',
-      rating: 5,
-      image: 'AR',
+      name: 'Kunal Verma',
+      role: 'JEE Aspirant',
+      content: 'The problem sheets and timed practice sessions improved my speed and accuracy a lot.',
+      rating: 4,
+      image: 'KV',
+      avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d',
     },
+    {
+      name: 'Meera Iyer',
+      role: 'NEET Aspirant',
+      content: 'The biology revision modules are concise and easy to remember. It keeps me consistent.',
+      rating: 5,
+      image: 'MI',
+      avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce',
+    },
+    {
+      name: 'Rohan Singh',
+      role: 'Class 8',
+      content: 'Teachers explain concepts with examples, so math feels simple and fun now.',
+      rating: 5,
+      image: 'RS',
+      avatar: 'https://images.unsplash.com/photo-1507120410856-1f35574c3b45',
+    },
+    {
+      name: 'Sara Khan',
+      role: 'Class 11, Commerce',
+      content: 'The notes are neat and the teachers help us connect topics with real-life cases.',
+      rating: 4,
+      image: 'SK',
+      avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1',
+    },
+    {
+      name: 'Nikhil Rao',
+      role: 'Olympiad Prep',
+      content: 'Challenging questions and personal feedback helped me level up quickly.',
+      rating: 5,
+      image: 'NR',
+      avatar: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
+    },
+    {
+      name: 'Aisha Joseph',
+      role: 'Class 9',
+      content: 'Small batch size means more attention, and it shows in my marks.',
+      rating: 5,
+      image: 'AJ',
+      avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91',
+    },
+    {
+      name: 'Vivek Das',
+      role: 'Class 12, PCM',
+      content: 'The revision sprints before exams keep everything fresh and focused.',
+      rating: 5,
+      image: 'VD',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
+    },
+  ];
+  const testimonialSplitIndex = Math.ceil(testimonials.length / 2);
+  const testimonialRows = [
+    testimonials.slice(0, testimonialSplitIndex),
+    testimonials.slice(testimonialSplitIndex),
   ];
 
   return (
@@ -417,11 +473,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.10, duration: 0.5 }}
                     viewport={{ once: true }}
-                    className={`group relative rounded-2xl p-6 border border-white/10 backdrop-blur-md transition-all duration-300 ${
+                    className={`group relative rounded-2xl p-6 cursor-pointer border border-white/10 backdrop-blur-md transition-all duration-300 ${
                       item.featuredColor ? item.featuredColor : 'bg-white/10'
                     }`}
                   >
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-700 ease-in-out group-hover:rotate-[360deg] group-hover:scale-[1.2] ${
                       item.featuredColor ? 'bg-white/15' : 'bg-white/10'
                     }`}>
                       <item.icon className="size-6 text-white" />
@@ -487,7 +543,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                     
                     <div className="absolute top-6 left-6">
-                      <div className={`w-16 h-16 bg-gradient-to-br ${program.gradient} rounded-2xl flex items-center justify-center shadow-xl`}>
+                      <div className={`w-16 h-16 bg-gradient-to-br ${program.gradient} rounded-2xl flex items-center justify-center shadow-xl transition-transform duration-700 ease-in-out group-hover:rotate-[360deg] group-hover:scale-[1.2]`}>
                         <program.icon className="size-8 text-white" />
                       </div>
                     </div>
@@ -703,68 +759,120 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="relative py-24 bg-white text-slate-900 overflow-hidden">
         <style>{`
           @keyframes testimonials-marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
           }
+          .testimonials-track {
+            animation: testimonials-marquee 34s linear infinite;
+            will-change: transform;
+          }
+          .testimonials-track.reverse {
+            animation-direction: reverse;
+          }
+          .testimonials-row:hover .testimonials-track {
+            animation-play-state: paused;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .testimonials-track {
+              animation: none;
+              transform: translateX(0);
+            }
+          }
+          .testimonials-mask {
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+          }
         `}</style>
-        <div className="container mx-auto px-4">
+        <div className="absolute inset-0">
+          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[var(--brand-red)]/10 blur-[120px]" />
+          <div className="absolute -bottom-24 right-0 h-96 w-96 rounded-full bg-[var(--brand-blue)]/10 blur-[140px]" />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="inline-block text-[var(--brand-red)] font-bold mb-4 px-4 py-2 bg-red-50 rounded-full text-sm tracking-wide uppercase">
+            <span className="inline-block text-[var(--brand-red)] font-bold mb-4 px-4 py-2 bg-[var(--brand-red)]/10 rounded-full text-sm tracking-wide uppercase">
               Testimonials
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] bg-clip-text text-transparent">
-                Success Stories
-              </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              What Our Learners Say
             </h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+              Real feedback from students who experienced our programs.
+            </p>
           </motion.div>
 
-          <div className="relative overflow-hidden">
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white via-white/90 to-transparent backdrop-blur-sm" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white via-white/90 to-transparent backdrop-blur-sm" />
-            <div
-              className="flex w-max gap-6"
-              style={{
-                animation: 'testimonials-marquee 28s linear infinite',
-              }}
-            >
-              {[...testimonials, ...testimonials].map((testimonial, index) => (
-                <div
-                  key={`${testimonial.name}-${index}`}
-                  className="relative w-[260px] md:w-[300px]"
-                >
-                  <div className="relative bg-white p-7 rounded-[36px] border border-gray-100 shadow-[0_22px_50px_-35px_rgba(15,23,42,0.6)] transition-transform duration-300 hover:-translate-y-1 h-[250px] flex flex-col overflow-hidden">
-                    <div className="absolute -right-16 -top-16 w-40 h-40 bg-[var(--brand-blue)]/10 rounded-full blur-2xl" />
-                    <div className="absolute left-4 top-10 bottom-10 w-1 bg-gradient-to-b from-[var(--brand-red)] to-[var(--brand-red-light)] rounded-full" />
-                    <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-blue-50/60 pointer-events-none" />
+          <div className="testimonials-wrap testimonials-mask relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-44 z-30  bg-[linear-gradient(90deg,rgba(255, 255, 255, 0.9)_0%,rgba(255,255,255,0)_100%)]" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-44 z-30  bg-[linear-gradient(275deg,rgba(255, 255, 255, 0.88)_0%,rgba(255,255,255,0)_100%)]" />
 
-                    <div className="relative z-10 flex flex-col h-full">
-                      <div className="flex gap-1.5 mb-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="size-4 fill-[var(--brand-red)] text-[var(--brand-red)]" />
-                        ))}
-                      </div>
+            <div className="space-y-6">
+              {testimonialRows.map((row, rowIndex) => (
+                <div key={`row-${rowIndex}`} className="testimonials-row overflow-hidden">
+                  <div className={`testimonials-track flex w-max gap-6 ${rowIndex === 1 ? 'reverse' : ''}`}>
+                    {[...row, ...row].map((testimonial, index) => (
+                      <div
+                        key={`${testimonial.name}-${rowIndex}-${index}`}
+                        className="relative w-[260px] md:w-[400px] shrink-0"
+                      >
+                        <div className="relative h-[240px] md:h-[260px] rounded-2xl border border-white/60 bg-white/40 backdrop-blur-xl shadow-[0_24px_60px_-40px_rgba(15,23,42,0.45)] overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-blue)]/10 via-transparent to-[var(--brand-red)]/12" />
+                          <div className="relative p-6 md:p-7 flex flex-col h-full">
+                            <div className="flex items-center gap-4 pb-4 border-b border-slate-200/70">
+                              <div className="h-12 w-12 rounded-full overflow-hidden border border-white/60 bg-white/80 flex items-center justify-center">
+                                {testimonial.avatar ? (
+                                  <ImageWithFallback
+                                    src={testimonial.avatar}
+                                    alt={testimonial.name}
+                                    className="h-full w-full object-cover"
+                                  />
+                                ) : (
+                                  <span className="font-semibold text-sm text-[var(--brand-blue)]">
+                                    {testimonial.image}
+                                  </span>
+                                )}
+                              </div>
+                              <div>
+                                <p className="font-semibold text-slate-900">{testimonial.name}</p>
+                                <p className="text-sm text-slate-500">{testimonial.role}</p>
+                              </div>
+                            </div>
 
-                      <p className="text-gray-700 mb-5 text-sm leading-relaxed">"{testimonial.content}"</p>
+                            <div className="mt-4 flex items-center gap-2 text-sm text-slate-500">
+                              <span className="text-slate-400">{testimonial.rating.toFixed(1)}</span>
+                              <div className="flex gap-1">
+                                {[...Array(testimonial.rating)].map((_, i) => (
+                                  <Star key={i} className="size-4 fill-[#f5c542] text-[#f5c542]" />
+                                ))}
+                              </div>
+                            </div>
 
-                      <div className="mt-auto flex items-center gap-3">
-                        <div className="w-11 h-11 bg-gradient-to-br from-[var(--brand-blue)] to-[var(--brand-blue-light)] rounded-xl flex items-center justify-center text-white font-semibold text-sm">
-                          {testimonial.image}
+                            <p
+                              className="mt-4 text-slate-600 leading-relaxed text-sm"
+                              style={{
+                                display: '-webkit-box',
+                                WebkitLineClamp: 4,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden',
+                              }}
+                            >
+                              {testimonial.content}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="font-semibold text-[var(--brand-blue)] text-sm">{testimonial.name}</p>
-                          <p className="text-xs text-gray-500">{testimonial.role}</p>
-                        </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               ))}
