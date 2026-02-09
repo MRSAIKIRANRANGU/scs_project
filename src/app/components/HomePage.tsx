@@ -299,6 +299,21 @@ export function HomePage({ onNavigate }: HomePageProps) {
         .float-slow { animation: page-float 14s ease-in-out infinite; }
         .float-medium { animation: page-float 10s ease-in-out infinite; }
         .float-reverse { animation-direction: reverse; }
+        @keyframes hero-rotate {
+          from { transform: translate3d(0, 0, 0) rotate(0deg); }
+          to { transform: translate3d(0, 0, 0) rotate(360deg); }
+        }
+        @keyframes hero-glow {
+          0%, 100% { opacity: 0.45; }
+          50% { opacity: 0.85; }
+        }
+        .hero-grid {
+          background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+          background-size: 28px 28px;
+          opacity: 0.2;
+        }
+        .hero-orbit { animation: hero-rotate 40s linear infinite; }
+        .hero-glow { animation: hero-glow 8s ease-in-out infinite; }
       `}</style>
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-start overflow-hidden bg-gradient-to-br from-[var(--brand-blue)] via-[var(--brand-blue-dark)] to-[var(--brand-blue)]">
@@ -320,6 +335,10 @@ export function HomePage({ onNavigate }: HomePageProps) {
             transition={{ duration: 25, repeat: Infinity }}
             className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-blue-400/10 rounded-full blur-3xl"
           />
+          <div className="absolute inset-0 hero-grid" />
+          <div className="absolute right-[-12%] top-1/2 h-[520px] w-[520px] -translate-y-1/2 rounded-full border border-white/10 hero-orbit" />
+          <div className="absolute right-[-6%] top-1/2 h-[360px] w-[360px] -translate-y-1/2 rounded-full border border-white/5 hero-orbit" />
+          <div className="absolute left-1/2 top-1/4 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[var(--brand-red)]/20 blur-[140px] hero-glow" />
         </div>
 
         {/* Parallax Background Image */}
@@ -339,11 +358,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
               <ImageWithFallback
                 src={heroSlides[heroSlideIndex].backgroundImage}
                 alt="Campus"
-                className="w-full h-full object-cover opacity-20"
+                className="w-full h-full object-cover opacity-70"
               />
             </motion.div>
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-r" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#081A36]/55 via-[#0B2E57]/35 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#061426]/45 via-transparent to-[#0B2E57]/15" />
         </motion.div>
 
         {/* Hero Content */}
@@ -377,8 +397,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   className="text-5xl md:text-7xl lg:text-7xl font-bold text-white mb-8 leading-tight"
                 >
                   {heroSlides[heroSlideIndex].title}
-                  <span className="block bg-gradient-to-r from-[var(--brand-red)] to-[var(--brand-red-light)] bg-clip-text text-transparent">
-                    {heroSlides[heroSlideIndex].accent}
+                  <span className="relative block">
+                    <span className="absolute -bottom-3 left-0 h-3 w-40 bg-[var(--brand-red)]/40 blur-2xl" aria-hidden="true" />
+                    <span className="bg-gradient-to-r from-[var(--brand-red)] to-[var(--brand-red-light)] bg-clip-text text-transparent drop-shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+                      {heroSlides[heroSlideIndex].accent}
+                    </span>
                   </span>
                 </motion.h1>
                 
@@ -390,7 +413,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 >
                   {heroSlides[heroSlideIndex].description}
                 </motion.p>
-                
+
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -590,12 +613,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
         <div className="container mx-auto px-4">
           <div className="relative overflow-hidden rounded-3xl bg-[#0B2E57] shadow-2xl">
             <div className="absolute inset-0">
+              <div className="absolute inset-0 bg-[#0B2E57]" />
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1509062522246-3755977927d7"
-                alt="Campus"
-                className="h-full w-full object-cover opacity-25"
+                src="https://upload.wikimedia.org/wikipedia/commons/c/c2/India_at_night_from_space_during_Diwali_2012.jpg"
+                alt="India at night from space"
+                className="absolute inset-0 h-full w-full object-cover opacity-50"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E57]/95 via-[#0B2E57]/85 to-[#0B2E57]/95" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E57]/75 via-[#0B2E57]/55 to-[#0B2E57]/75" />
             </div>
             <div className="relative z-10 px-6 py-8 md:px-10 md:py-10">
               <p className="text-center text-xs uppercase tracking-[0.4em] text-white/70 mb-6">
