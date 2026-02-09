@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { 
   GraduationCap, 
   BookOpen,
@@ -7,6 +7,7 @@ import {
   Trophy,
   Target,
   Star,
+  ChevronLeft,
   ChevronRight,
   Sparkles,
   CheckCircle,
@@ -63,6 +64,22 @@ export function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
+  const heroStats = useMemo(
+    () => [
+      { value: 22, label: 'States' },
+      { value: 248, label: 'Cities' },
+      { value: 40, label: 'Years' },
+      { value: 950, label: 'Schools' },
+      { value: 55000, label: 'Staff' },
+      { value: 950000, label: 'Students' },
+      { value: 1361738, label: 'Parents' },
+    ],
+    []
+  );
+  const [statsActive, setStatsActive] = useState(false);
+  const [statsAnimated, setStatsAnimated] = useState(() => heroStats.map(() => 0));
+  const statsRef = useRef<HTMLDivElement>(null);
+  const statsFormatter = useMemo(() => new Intl.NumberFormat('en-US'), []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -71,6 +88,49 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
     return () => clearInterval(intervalId);
   }, [heroSlides.length]);
+
+  useEffect(() => {
+    const node = statsRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsActive(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!statsActive) return;
+    let rafId = 0;
+    const duration = 1600;
+    const start = performance.now();
+
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setStatsAnimated(heroStats.map((stat) => Math.round(stat.value * eased)));
+      if (progress < 1) {
+        rafId = requestAnimationFrame(animate);
+      }
+    };
+
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, [statsActive, heroStats]);
+
+  const handleNextHeroSlide = () => {
+    setHeroSlideIndex((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const handlePrevHeroSlide = () => {
+    setHeroSlideIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
 
   const programTiles = [
     { icon: Target, title: 'IIT (Main & Advanced)', featuredColor: 'bg-white/10'  },
@@ -231,6 +291,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
   return (
     <div className="w-full overflow-x-hidden">
+      <style>{`
+        @keyframes page-float {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          50% { transform: translate3d(0, -14px, 0); }
+        }
+        .float-slow { animation: page-float 14s ease-in-out infinite; }
+        .float-medium { animation: page-float 10s ease-in-out infinite; }
+        .float-reverse { animation-direction: reverse; }
+      `}</style>
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-start overflow-hidden bg-gradient-to-br from-[var(--brand-blue)] via-[var(--brand-blue-dark)] to-[var(--brand-blue)]">
         {/* Animated Background Elements */}
@@ -338,9 +407,29 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   </Button>
                  
                 </motion.div>
+
               </motion.div>
             </AnimatePresence>
           </div>
+        </div>
+
+        <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-4 md:px-10">
+          <button
+            type="button"
+            onClick={handlePrevHeroSlide}
+            className="pointer-events-auto cursor-pointer group flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition-all duration-300 hover:border-white/60 hover:bg-white/20"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="size-5 transition-transform duration-300 group-hover:-translate-x-0.5" />
+          </button>
+          <button
+            type="button"
+            onClick={handleNextHeroSlide}
+            className="pointer-events-auto cursor-pointer group flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition-all duration-300 hover:border-white/60 hover:bg-white/20"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="size-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+          </button>
         </div>
 
       </section>
@@ -446,8 +535,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true, amount: 0.3 }}
             className="relative overflow-hidden rounded-3xl bg-[#082C53] from-[var(--brand-blue)] via-[var(--brand-blue-dark)] to-[var(--brand-blue)] p-8 md:p-12 shadow-2xl"
           >
-            <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[var(--brand-red)]/20 blur-3xl" />
-            <div className="absolute -left-24 -bottom-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+            <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[var(--brand-red)]/20 blur-3xl float-medium" />
+            <div className="absolute -left-24 -bottom-24 h-64 w-64 rounded-full bg-white/10 blur-3xl float-slow float-reverse" />
             <motion.div
               initial={{ x: '-120%', opacity: 0 }}
               whileInView={{ x: '120%', opacity: 0.35 }}
@@ -493,6 +582,42 @@ export function HomePage({ onNavigate }: HomePageProps) {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Programs Stats Strip */}
+      <section ref={statsRef} className="relative -mt-10 pb-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="relative overflow-hidden rounded-3xl bg-[#0B2E57] shadow-2xl">
+            <div className="absolute inset-0">
+              <ImageWithFallback
+                src="https://images.unsplash.com/photo-1509062522246-3755977927d7"
+                alt="Campus"
+                className="h-full w-full object-cover opacity-25"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E57]/95 via-[#0B2E57]/85 to-[#0B2E57]/95" />
+            </div>
+            <div className="relative z-10 px-6 py-8 md:px-10 md:py-10">
+              <p className="text-center text-xs uppercase tracking-[0.4em] text-white/70 mb-6">
+                Sri Chaitanya Schools
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 text-center">
+                {heroStats.map((stat, index) => (
+                  <div key={stat.label} className="space-y-2">
+                  <div className="text-2xl md:text-3xl font-semibold text-white">
+                      {statsFormatter.format(statsAnimated[index])}
+                  </div>
+                    <div className="text-[11px] uppercase tracking-[0.3em] text-white/70">
+                      {stat.label}
+                    </div>
+                    {index < heroStats.length - 1 && (
+                      <span className="hidden lg:block mx-auto h-8 w-px bg-white/20" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -571,10 +696,38 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* About Section (Tabbed Cards) */}
-      <section className="relative overflow-hidden bg-[#F8FAFC] py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-[#F8FAFC] to-white" />
-        <div className="pointer-events-none absolute -left-32 top-16 h-64 w-64 rounded-full bg-[var(--brand-blue)]/10 blur-3xl" />
-        <div className="pointer-events-none absolute -right-40 bottom-10 h-72 w-72 rounded-full bg-[var(--brand-red)]/10 blur-3xl" />
+      <section className="relative overflow-hidden bg-white py-24 text-slate-900">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-[#F6FAFF]" />
+        <div className="pointer-events-none absolute top-0 left-0 right-0 h-20 md:h-28">
+          <svg
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+            className="h-full w-full"
+            aria-hidden="true"
+          >
+            <path
+              d="M0,24 C240,88 480,96 720,68 C960,40 1200,8 1440,24 L1440,0 L0,0 Z"
+              fill="var(--brand-blue)"
+              fillOpacity="0.85"
+            />
+          </svg>
+        </div>
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-20 md:h-28 rotate-180">
+          <svg
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+            className="h-full w-full"
+            aria-hidden="true"
+          >
+            <path
+              d="M0,24 C240,88 480,96 720,68 C960,40 1200,8 1440,24 L1440,0 L0,0 Z"
+              fill="var(--brand-blue)"
+              fillOpacity="0.85"
+            />
+          </svg>
+        </div>
+        <div className="pointer-events-none absolute -left-32 top-16 h-64 w-64 rounded-full bg-[var(--brand-blue)]/10 blur-3xl float-slow" />
+        <div className="pointer-events-none absolute -right-40 bottom-10 h-72 w-72 rounded-full bg-[var(--brand-red)]/10 blur-3xl float-medium float-reverse" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -791,8 +944,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
           }
         `}</style>
         <div className="absolute inset-0">
-          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[var(--brand-red)]/10 blur-[120px]" />
-          <div className="absolute -bottom-24 right-0 h-96 w-96 rounded-full bg-[var(--brand-blue)]/10 blur-[140px]" />
+          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[var(--brand-red)]/10 blur-[120px] float-slow" />
+          <div className="absolute -bottom-24 right-0 h-96 w-96 rounded-full bg-[var(--brand-blue)]/10 blur-[140px] float-medium float-reverse" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -884,8 +1037,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-r from-[var(--brand-blue)] via-[var(--brand-blue-dark)] to-[var(--brand-blue)] text-white relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--brand-red)]/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--brand-red)]/20 rounded-full blur-3xl float-medium" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl float-slow float-reverse" />
         </div>
 
         <div className="container mx-auto px-4 text-center relative z-10">
