@@ -615,10 +615,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <div className="absolute inset-0">
               <div className="absolute inset-0 bg-[#0B2E57]" />
               <ImageWithFallback
-                src="https://upload.wikimedia.org/wikipedia/commons/c/c2/India_at_night_from_space_during_Diwali_2012.jpg"
+                src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*PCX2Wv2Sgl3GDmEp-4UrwA.png"
                 alt="India at night from space"
                 className="absolute inset-0 h-full w-full object-cover opacity-50"
               />
+              {/* https://upload.wikimedia.org/wikipedia/commons/c/c2/India_at_night_from_space_during_Diwali_2012.jpg */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E57]/75 via-[#0B2E57]/55 to-[#0B2E57]/75" />
             </div>
             <div className="relative z-10 px-6 py-8 md:px-10 md:py-10">
