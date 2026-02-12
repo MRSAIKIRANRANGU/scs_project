@@ -193,7 +193,7 @@ export function Navbar({
                             scale: 0.95,
                           }}
                           transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl py-3 min-w-[240px] border border-gray-100"
+                          className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl p-2 min-w-[240px] border border-gray-100 overflow-hidden"
                         >
                           {item.submenu.map((subItem) => (
                             <motion.button
@@ -202,10 +202,12 @@ export function Navbar({
                                 onNavigate(subItem.id);
                                 setOpenDropdown(null);
                               }}
-                              whileHover={{ x: 8 }}
-                              className="w-full cursor-pointer text-left px-6 py-3 text-gray-700 hover:text-[var(--brand-blue)] hover:bg-blue-50 transition-all duration-200 font-medium"
+                              className="group relative w-full cursor-pointer text-left px-5 py-3 rounded-xl text-gray-700 transition-all duration-200 font-medium hover:text-[var(--brand-blue)] hover:font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)]/25"
                             >
-                              {subItem.label}
+                              <span className="relative z-10 inline-block">
+                                {subItem.label}
+                                <span className="absolute -bottom-1 left-0 h-[2px] w-0 rounded-full bg-gradient-to-r from-[var(--brand-blue)] via-[var(--brand-blue-light)] to-[var(--brand-red)] transition-[width] duration-300 group-hover:w-full" />
+                              </span>
                             </motion.button>
                           ))}
                         </motion.div>

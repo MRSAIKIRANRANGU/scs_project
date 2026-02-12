@@ -29,6 +29,52 @@ interface HomePageProps {
   onNavigate: (section: string) => void;
 }
 
+const AnimatedCharsAlt = ({
+  text,
+  className,
+  delay = 0,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+}) => (
+  <motion.span
+    className={className}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, amount: 0.7 }}
+    variants={{
+      hidden: {},
+      visible: {
+        transition: {
+          staggerChildren: 0.03,
+          delayChildren: delay,
+        },
+      },
+    }}
+    aria-label={text}
+  >
+    {text.split('').map((char, index) => (
+      <motion.span
+        key={`${char}-${index}`}
+        className="inline-block"
+        variants={{
+          hidden: { opacity: 0, y: 10, scale: 0.95, rotate: -2 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotate: 0,
+            transition: { duration: 0.5, ease: 'easeOut' },
+          },
+        }}
+      >
+        {char === ' ' ? '\u00A0' : char}
+      </motion.span>
+    ))}
+  </motion.span>
+);
+
 export function HomePage({ onNavigate }: HomePageProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -208,6 +254,17 @@ export function HomePage({ onNavigate }: HomePageProps) {
   ];
   const [activeAboutTab, setActiveAboutTab] = useState(aboutCards[0]?.id ?? '');
 
+
+  const aboutHeadlineLine1 = 'Built on Purpose,';
+  const aboutHeadlineLine2 = 'Designed for Impact';
+  const aboutHeadlineDelay = aboutHeadlineLine1.length * 0.035 + 0.2;
+  const programsHeadlineLine1 = 'Comprehensive Learning';
+  const programsHeadlineLine2 = 'Pathways';
+  const programsHeadlineDelay = programsHeadlineLine1.length * 0.035 + 0.2;
+  const campusHeadlineLine1 = 'Discover Our';
+  const campusHeadlineLine2 = 'Campus Moments';
+  const campusHeadlineDelay = campusHeadlineLine1.length * 0.035 + 0.2;
+  const testimonialsHeadlineLine1 = 'What Our Learners Say';
 
   const testimonials = [
     {
@@ -660,12 +717,16 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <span className="inline-block text-[var(--brand-red)] font-bold mb-4 px-4 py-2 bg-red-50 rounded-full text-sm tracking-wide uppercase">
               Our Programs
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] bg-clip-text text-transparent">
-                Comprehensive Learning
-              </span>
-              <br />
-              Pathways
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6">
+              <AnimatedCharsAlt
+                text={programsHeadlineLine1}
+                className="block pb-1 bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] bg-clip-text text-transparent"
+              />
+              <AnimatedCharsAlt
+                text={programsHeadlineLine2}
+                className="block"
+                delay={programsHeadlineDelay}
+              />
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
               From foundational learning to competitive exam preparation, designed to excel at every stage.
@@ -754,27 +815,26 @@ export function HomePage({ onNavigate }: HomePageProps) {
         <div className="pointer-events-none absolute -left-32 top-16 h-64 w-64 rounded-full bg-[var(--brand-blue)]/10 blur-3xl float-slow" />
         <div className="pointer-events-none absolute -right-40 bottom-10 h-72 w-72 rounded-full bg-[var(--brand-red)]/10 blur-3xl float-medium float-reverse" />
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
             <span className="inline-block text-[var(--brand-red)] font-bold mb-4 px-4 py-2 bg-red-50 rounded-full text-sm tracking-wide uppercase">
               About Us
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] bg-clip-text text-transparent">
-                Built on Purpose,
-              </span>
-              <br />
-              Designed for Impact
+              <AnimatedCharsAlt
+                text={aboutHeadlineLine1}
+                className="block bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] bg-clip-text text-transparent"
+              />
+              <AnimatedCharsAlt
+                text={aboutHeadlineLine2}
+                className="block"
+                delay={aboutHeadlineDelay}
+              />
             </h2>
             <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
               A modern learning ecosystem that blends academic rigor, personalized mentoring, and
               future-ready skills at every stage.
             </p>
-          </motion.div>
+          </div>
 
           <div className="mx-auto max-w-5xl">
             <div className="relative mb-10 rounded-2xl border border-blue-100 bg-white/90 p-2 shadow-sm">
@@ -898,11 +958,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
               Campus Life
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] bg-clip-text text-transparent">
-                Discover Our
-              </span>
-              <br />
-              Campus Moments
+              <AnimatedCharsAlt
+                text={campusHeadlineLine1}
+                className="block bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] bg-clip-text text-transparent"
+              />
+              <AnimatedCharsAlt
+                text={campusHeadlineLine2}
+                className="block"
+                delay={campusHeadlineDelay}
+              />
             </h2>
           </motion.div>
 
@@ -984,7 +1048,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
               Testimonials
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              What Our Learners Say
+              <AnimatedCharsAlt text={testimonialsHeadlineLine1} className="block" />
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto text-lg">
               Real feedback from students who experienced our programs.
@@ -1070,11 +1134,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.4 }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8">
-              Begin Your Journey to
-              <span className="block text-[var(--brand-red)]">Excellence</span>
+              <AnimatedCharsAlt text="Begin Your Journey to" className="block" />
+              <AnimatedCharsAlt
+                text="Excellence"
+                className="block text-[var(--brand-red)]"
+                delay={0.35}
+              />
             </h2>
             <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
               Join thousands of successful students who have transformed their futures with Sri Chaitanya.
