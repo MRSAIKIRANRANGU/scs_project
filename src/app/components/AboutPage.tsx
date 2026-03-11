@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Target, Eye, Heart, Award, Users, BookOpen, TrendingUp, Globe } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { localImages } from '../../assets/localImages';
 
 export function AboutPage() {
   const milestones = [
@@ -94,7 +95,7 @@ export function AboutPage() {
             >
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1730106443463-0fb1512c5e60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzY2hvb2wlMjBidWlsZGluZyUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzAyMDE3NjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                  src={localImages["https://images.unsplash.com/photo-1730106443463-0fb1512c5e60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzY2hvb2wlMjBidWlsZGluZyUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzAyMDE3NjR8MA&ixlib=rb-4.1.0&q=80&w=1080"]}
                   alt="School Building"
                   className="w-full h-[500px] object-cover"
                 />
@@ -277,3 +278,6 @@ export function AboutPage() {
     </div>
   );
 }
+
+
+

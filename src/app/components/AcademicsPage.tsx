@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { BookOpen, Microscope, Calculator, Globe, Palette, Music, Trophy, Code } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { localImages } from '../../assets/localImages';
 
 export function AcademicsPage() {
   const subjects = [
@@ -99,7 +100,7 @@ export function AcademicsPage() {
               className="rounded-2xl overflow-hidden shadow-2xl"
             >
               <ImageWithFallback
-                src="https://images.unsplash.com/flagged/photo-1574097656146-0b43b7660cb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBzY2hvb2wlMjBzdHVkZW50cyUyMHN0dWR5aW5nJTIwY2xhc3Nyb29tfGVufDF8fHx8MTc3MDIwMTc2Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+                src={localImages["https://images.unsplash.com/flagged/photo-1574097656146-0b43b7660cb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBzY2hvb2wlMjBzdHVkZW50cyUyMHN0dWR5aW5nJTIwY2xhc3Nyb29tfGVufDF8fHx8MTc3MDIwMTc2Mnww&ixlib=rb-4.1.0&q=80&w=1080"]}
                 alt="Classroom"
                 className="w-full h-[400px] object-cover"
               />
@@ -143,3 +144,6 @@ export function AcademicsPage() {
     </div>
   );
 }
+
+
+

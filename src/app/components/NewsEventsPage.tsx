@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { localImages } from '../../assets/localImages';
 
 export function NewsEventsPage() {
   const news = [
@@ -9,42 +10,42 @@ export function NewsEventsPage() {
       title: 'Annual Sports Day 2026',
       date: 'March 15, 2026',
       category: 'Events',
-      image: 'https://images.unsplash.com/photo-1696319179104-d85903b82048?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY2hvb2wlMjBzdHVkZW50cyUyMHNwb3J0cyUyMGZpZWxkfGVufDF8fHx8MTc3MDIwMTc2Mnww&ixlib=rb-4.1.0&q=80&w=1080',
+      image: localImages["https://images.unsplash.com/photo-1696319179104-d85903b82048?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY2hvb2wlMjBzdHVkZW50cyUyMHNwb3J0cyUyMGZpZWxkfGVufDF8fHx8MTc3MDIwMTc2Mnww&ixlib=rb-4.1.0&q=80&w=1080"],
       excerpt: 'Join us for our annual sports day celebration featuring various athletic competitions and cultural programs.',
     },
     {
       title: 'Science Exhibition Success',
       date: 'February 20, 2026',
       category: 'News',
-      image: 'https://images.unsplash.com/photo-1707944746620-fc0371b91906?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY2llbmNlJTIwbGFib3JhdG9yeSUyMGVxdWlwbWVudHxlbnwxfHx8fDE3NzAwOTY5Njl8MA&ixlib=rb-4.1.0&q=80&w=1080',
+      image: localImages["https://images.unsplash.com/photo-1707944746620-fc0371b91906?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY2llbmNlJTIwbGFib3JhdG9yeSUyMGVxdWlwbWVudHxlbnwxfHx8fDE3NzAwOTY5Njl8MA&ixlib=rb-4.1.0&q=80&w=1080"],
       excerpt: 'Our students showcased innovative projects at the regional science exhibition, winning multiple awards.',
     },
     {
       title: 'New Computer Lab Inauguration',
       date: 'February 10, 2026',
       category: 'News',
-      image: 'https://images.unsplash.com/photo-1766297247924-6638d54e7c89?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21wdXRlciUyMGxhYiUyMHN0dWRlbnRzJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NzAyMDE3Njl8MA&ixlib=rb-4.1.0&q=80&w=1080',
+      image: localImages["https://images.unsplash.com/photo-1766297247924-6638d54e7c89?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21wdXRlciUyMGxhYiUyMHN0dWRlbnRzJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NzAyMDE3Njl8MA&ixlib=rb-4.1.0&q=80&w=1080"],
       excerpt: 'State-of-the-art computer laboratory with latest technology inaugurated at our Hyderabad campus.',
     },
     {
       title: 'Parent-Teacher Meeting',
       date: 'March 25, 2026',
       category: 'Events',
-      image: 'https://images.unsplash.com/photo-1511629091441-ee46146481b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjB0ZWFjaGVyJTIwY2xhc3Nyb29tJTIwdGVhY2hpbmd8ZW58MXx8fHwxNzcwMjAxNzY0fDA&ixlib=rb-4.1.0&q=80&w=1080',
+      image: localImages["https://images.unsplash.com/photo-1511629091441-ee46146481b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjB0ZWFjaGVyJTIwY2xhc3Nyb29tJTIwdGVhY2hpbmd8ZW58MXx8fHwxNzcwMjAxNzY0fDA&ixlib=rb-4.1.0&q=80&w=1080"],
       excerpt: 'Quarterly parent-teacher meeting to discuss student progress and academic development.',
     },
     {
       title: 'Outstanding JEE Results 2025',
       date: 'January 30, 2026',
       category: 'Achievement',
-      image: 'https://images.unsplash.com/photo-1591218214141-45545921d2d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFkdWF0aW9uJTIwY2VyZW1vbnklMjBzdHVkZW50cyUyMGNlbGVicmF0aW5nfGVufDF8fHx8MTc3MDE5NzEwNHww&ixlib=rb-4.1.0&q=80&w=1080',
+      image: localImages["https://images.unsplash.com/photo-1591218214141-45545921d2d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFkdWF0aW9uJTIwY2VyZW1vbnklMjBzdHVkZW50cyUyMGNlbGVicmF0aW5nfGVufDF8fHx8MTc3MDE5NzEwNHww&ixlib=rb-4.1.0&q=80&w=1080"],
       excerpt: '95% of our students qualified JEE 2025, with 50+ students securing top 1000 ranks.',
     },
     {
       title: 'Cultural Festival 2026',
       date: 'April 5, 2026',
       category: 'Events',
-      image: 'https://images.unsplash.com/photo-1758270705518-b61b40527e76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwc3R1ZGVudHMlMjBncm91cCUyMGxlYXJuaW5nfGVufDF8fHx8MTc3MDIwMTc2OXww&ixlib=rb-4.1.0&q=80&w=1080',
+      image: localImages["https://images.unsplash.com/photo-1758270705518-b61b40527e76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwc3R1ZGVudHMlMjBncm91cCUyMGxlYXJuaW5nfGVufDF8fHx8MTc3MDIwMTc2OXww&ixlib=rb-4.1.0&q=80&w=1080"],
       excerpt: 'Annual cultural festival celebrating diversity, talent, and creativity of our students.',
     },
   ];
@@ -144,3 +145,5 @@ export function NewsEventsPage() {
     </div>
   );
 }
+
+

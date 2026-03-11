@@ -24,6 +24,7 @@ import {
   SelectValue
 } from './ui/select';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { localImages } from '../../assets/localImages';
 
 interface HomePageProps {
   onNavigate: (section: string) => void;
@@ -91,21 +92,21 @@ export function HomePage({ onNavigate }: HomePageProps) {
       title: 'Shaping Future',
       accent: 'Leaders & Innovators',
       description: 'Empowering students with world-class education, innovative teaching, and a nurturing environment for holistic development.',
-      backgroundImage: 'https://images.unsplash.com/photo-1723899957933-2c2e01b859ce',
+      backgroundImage: localImages["https://images.unsplash.com/photo-1723899957933-2c2e01b859ce"],
     },
     {
       badge: 'India’s Trusted Learning Network',
       title: 'Building Bright',
       accent: 'Academic Foundations',
       description: 'From primary to competitive preparation, our programs inspire curiosity, confidence, and consistent achievement.',
-      backgroundImage: 'https://images.unsplash.com/photo-1696319179104-d85903b82048',
+      backgroundImage: localImages["https://images.unsplash.com/photo-1696319179104-d85903b82048"],
     },
     {
       badge: 'Personalized Learning Pathways',
       title: 'Unlocking',
       accent: 'Student Potential',
       description: 'Expert faculty, modern infrastructure, and a supportive culture help every learner thrive.',
-      backgroundImage: 'https://images.unsplash.com/photo-1511629091441-ee46146481b6',
+      backgroundImage: localImages["https://images.unsplash.com/photo-1511629091441-ee46146481b6"],
     },
   ];
 
@@ -190,21 +191,21 @@ export function HomePage({ onNavigate }: HomePageProps) {
       description: 'Building strong foundations with innovative learning methodologies and child-centric approaches.',
       icon: BookOpen,
       gradient: 'from-blue-500 to-cyan-500',
-      image: 'https://images.unsplash.com/photo-1698465344246-68055cb6ef06',
+      image: localImages["https://images.unsplash.com/photo-1698465344246-68055cb6ef06"],
     },
     {
       title: 'Secondary Education',
       description: 'Comprehensive curriculum aligned with national standards and future-ready skills development.',
       icon: Globe,
       gradient: 'from-purple-500 to-pink-500',
-      image: 'https://images.unsplash.com/flagged/photo-1574097656146-0b43b7660cb6',
+      image: localImages["https://images.unsplash.com/flagged/photo-1574097656146-0b43b7660cb6"],
     },
     {
       title: 'Competitive Preparation',
       description: 'Specialized coaching for JEE, NEET, and national-level competitive examinations.',
       icon: Trophy,
       gradient: 'from-orange-500 to-red-500',
-      image: 'https://images.unsplash.com/photo-1707944746620-fc0371b91906',
+      image: localImages["https://images.unsplash.com/photo-1707944746620-fc0371b91906"],
     },
   ];
 
@@ -215,7 +216,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       title: 'A Legacy of Learning',
       description:
         'Sri Chaitanya is a learning community built on rigorous academics and personal care. Since 1986, we have blended world-class curricula with mentorship to shape confident learners ready for boards and competitive exams.',
-      image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7',
+      image: localImages["https://images.unsplash.com/photo-1509062522246-3755977927d7"],
       theme: 'bg-[#0B3B6E]',
     },
     {
@@ -224,7 +225,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       title: 'Our Mission',
       description:
         'To deliver holistic, future-ready education that nurtures intellect, character, and resilience. We combine data-driven teaching, modern infrastructure, and compassionate guidance so every student can excel.',
-      image: 'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b',
+      image: localImages["https://images.unsplash.com/photo-1523580846011-d3a5bc25702b"],
       theme: 'bg-[var(--brand-red)]',
       reverse: true,
     },
@@ -234,22 +235,22 @@ export function HomePage({ onNavigate }: HomePageProps) {
       title: 'Leadership & Management',
       description:
         'Our leadership team brings decades of academic and operational excellence. Strong governance, continuous teacher training, and student-centric systems ensure quality learning at scale.',
-      image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d',
+      image: localImages["https://images.unsplash.com/photo-1521737604893-d14cc237f11d"],
       theme: 'bg-[#111827]',
     },
   ];
   const aboutHighlights = [
     {
       title: 'Student Life',
-      image: 'https://images.unsplash.com/photo-1696319179104-d85903b82048',
+      image: localImages["https://images.unsplash.com/photo-1696319179104-d85903b82048"],
     },
     {
       title: 'Admissions',
-      image: 'https://images.unsplash.com/photo-1511629091441-ee46146481b6',
+      image: localImages["https://images.unsplash.com/photo-1511629091441-ee46146481b6"],
     },
     {
       title: 'Campus',
-      image: 'https://images.unsplash.com/photo-1602114324193-e1c1b41dcde5',
+      image: localImages["https://images.unsplash.com/photo-1602114324193-e1c1b41dcde5"],
     },
   ];
   const [activeAboutTab, setActiveAboutTab] = useState(aboutCards[0]?.id ?? '');
@@ -273,7 +274,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'The study plan is crystal clear and the weekly tests helped me track my progress without stress.',
       rating: 5,
       image: 'AN',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e',
+      avatar: localImages["https://images.unsplash.com/photo-1500648767791-00dcc994a43e"],
     },
     {
       name: 'Diya Patel',
@@ -281,7 +282,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'Doubt-solving sessions are super helpful. I feel more confident going into board exams.',
       rating: 5,
       image: 'DP',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330',
+      avatar: localImages["https://images.unsplash.com/photo-1494790108377-be9c29b29330"],
     },
     {
       name: 'Kunal Verma',
@@ -289,7 +290,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'The problem sheets and timed practice sessions improved my speed and accuracy a lot.',
       rating: 4,
       image: 'KV',
-      avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d',
+      avatar: localImages["https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"],
     },
     {
       name: 'Meera Iyer',
@@ -297,7 +298,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'The biology revision modules are concise and easy to remember. It keeps me consistent.',
       rating: 5,
       image: 'MI',
-      avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce',
+      avatar: localImages["https://images.unsplash.com/photo-1492562080023-ab3db95bfbce"],
     },
     {
       name: 'Rohan Singh',
@@ -305,7 +306,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'Teachers explain concepts with examples, so math feels simple and fun now.',
       rating: 5,
       image: 'RS',
-      avatar: 'https://images.unsplash.com/photo-1507120410856-1f35574c3b45',
+      avatar: localImages["https://images.unsplash.com/photo-1507120410856-1f35574c3b45"],
     },
     {
       name: 'Sara Khan',
@@ -313,7 +314,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'The notes are neat and the teachers help us connect topics with real-life cases.',
       rating: 4,
       image: 'SK',
-      avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1',
+      avatar: localImages["https://images.unsplash.com/photo-1524504388940-b1c1722653e1"],
     },
     {
       name: 'Nikhil Rao',
@@ -321,7 +322,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'Challenging questions and personal feedback helped me level up quickly.',
       rating: 5,
       image: 'NR',
-      avatar: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
+      avatar: localImages["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"],
     },
     {
       name: 'Aisha Joseph',
@@ -329,7 +330,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'Small batch size means more attention, and it shows in my marks.',
       rating: 5,
       image: 'AJ',
-      avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91',
+      avatar: localImages["https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91"],
     },
     {
       name: 'Vivek Das',
@@ -337,7 +338,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       content: 'The revision sprints before exams keep everything fresh and focused.',
       rating: 5,
       image: 'VD',
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
+      avatar: localImages["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"],
     },
   ];
   const testimonialSplitIndex = Math.ceil(testimonials.length / 2);
@@ -672,7 +673,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <div className="absolute inset-0">
               <div className="absolute inset-0 bg-[#0B2E57]" />
               <ImageWithFallback
-                src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*PCX2Wv2Sgl3GDmEp-4UrwA.png"
+                src={localImages["https://miro.medium.com/v2/resize:fit:4800/format:webp/1*PCX2Wv2Sgl3GDmEp-4UrwA.png"]}
                 alt="India at night from space"
                 className="absolute inset-0 h-full w-full object-cover opacity-50"
               />
@@ -972,10 +973,10 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              'https://images.unsplash.com/photo-1696319179104-d85903b82048',
-              'https://images.unsplash.com/photo-1511629091441-ee46146481b6',
-              'https://images.unsplash.com/photo-1602114324193-e1c1b41dcde5',
-              'https://images.unsplash.com/photo-1766297247924-6638d54e7c89',
+              localImages["https://images.unsplash.com/photo-1696319179104-d85903b82048"],
+              localImages["https://images.unsplash.com/photo-1511629091441-ee46146481b6"],
+              localImages["https://images.unsplash.com/photo-1602114324193-e1c1b41dcde5"],
+              localImages["https://images.unsplash.com/photo-1766297247924-6638d54e7c89"],
             ].map((img, index) => (
               <motion.div
                 key={index}
@@ -1172,3 +1173,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
     </div>
   );
 }
+
+
+
